@@ -65,12 +65,6 @@ public class PortafolioService {
                 weightsPorActivo.put(montoActivo.getKey(), w);
             }
             
-            if (fecha.equals(portafolio.getFechaInicio())) {
-                valorTotal = portafolio.getValorInicial().setScale(6, BigDecimal.ROUND_HALF_UP);
-            } else {
-                valorTotal = valorTotal.setScale(6, BigDecimal.ROUND_HALF_UP);
-            }
-
             List<Map<String, Object>> activos = datosPorActivo(portafolio, cantidadesPorActivo, montosPorActivo,
                     weightsPorActivo);
 
