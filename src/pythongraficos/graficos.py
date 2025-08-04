@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 
+
 API_URL = "http://localhost:8080/api/portafolio/1"
 params = {
     "fecha_inicio": "2022-02-15",
@@ -54,18 +55,17 @@ vt_col = 'V_t'
 
 plt.figure(figsize=(14, 6))
 
-# Se muestra el gráfico stacked area para w_{i,t}
-# solo tome 3 activos para no sobrecargar el gráfico
-w_cols_top3 = w_cols[:3]
+# Se muestra el gráfico stacked area para w_{i,t} para todos los activos
 plt.stackplot(
     df['fecha'],
-    [df[col] for col in w_cols_top3],
-    labels=[f"{activo_nombres[int(col[2:])]}" for col in w_cols_top3], 
+    [df[col] for col in w_cols],
+    labels=[f"{activo_nombres[int(col[2:])]}" for col in w_cols], 
     alpha=0.6)
-plt.ylabel('w_{i,t}')
-plt.title('Evolución de pesos de los activos del portafolio 1(w_{i,t})')
+plt.ylabel('w_{i,t} (%)')
+plt.title('Evolución de pesos del portafolio 1 (w_{i,t})')
 plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 plt.grid(axis='y', alpha=0.3)
+plt.gca().yaxis.set_major_formatter(mtick.PercentFormatter(1.0))
 plt.tight_layout()
 
 # Gráfico de línea para V_t
